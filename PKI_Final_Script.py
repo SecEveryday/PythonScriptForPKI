@@ -4,6 +4,7 @@ from Crypto.Hash import SHA512
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Util.Padding import pad
 from Crypto.Util.Padding import unpad
+from Crypto.PublicKey import RSA
 import json
 import os
 def encrypt(message,passPhrase):
@@ -42,7 +43,14 @@ def decrypt_file(file_name):
     dec = decrypt(ciphertext, passPhrase)
     with open(file_name[:-4]+".decrypted", 'wb') as fo:
         fo.write(dec)
-
+def create_keys():
+    input_size = int(input("Enter the the key Size [Default : 2048] : ") or "2048")
+    fileName = input("\nYour Public Key will be : <name>.pub \nYour Private key will be : <name>.priv\nProvide a name : " )
+    key = RSA.generate(input_size)
+    with open(fileName + ".priv","wb") as f:
+        f.write(key.export_key('PEM'))
+    with open(fileName + ".pub","wb") as f:
+        f.write((key.public_key()).exportKey('PEM'))
 if __name__ == "__main__":
     while True:  
         print("\nWelcome to the Python Script to do the following:\n")
@@ -67,16 +75,16 @@ if __name__ == "__main__":
             else:
                 print("\nThe file does not exists")
         elif(UserOption == 3):
+            create_keys()
+        # elif(UserOption == 4):
+
+        # elif(UserOption == 5):
             
-        elif(UserOption == 4):
+        # elif(UserOption == 6):
 
-        elif(UserOption == 5):
-        
-        elif(UserOption == 6):
-
-        elif(UserOption == 7):
-            print("See you again!")
-            exit()
+        # elif(UserOption == 7):
+        #     print("See you again!")
+        #     exit()
         else:
             print("Wrong Input")
         
