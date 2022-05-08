@@ -1,2 +1,2 @@
-pycryptodome
+pycryptodome==3.5
 cryptography
