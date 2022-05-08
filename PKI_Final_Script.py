@@ -1,4 +1,4 @@
-from venv import create
+# Author : Koushik Krishnamurthy Sridhar
 from Crypto.Cipher import AES
 from Crypto import Random
 from Crypto.Hash import SHA512
