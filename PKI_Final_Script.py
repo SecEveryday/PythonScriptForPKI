@@ -57,9 +57,9 @@ def create_keys():
     fileName = input("\nYour Public Key will be : <name>.pub \nYour Private key will be : <name>.priv\nProvide a name : " )
     key = RSA.generate(input_size)
     with open(fileName + ".priv","wb") as f:
-        f.write(key.export_key('PEM'))
+        f.write(key.exportKey('PEM'))
     with open(fileName + ".pub","wb") as f:
-        f.write((key.public_key()).exportKey('PEM'))
+        f.write((key.publickey()).exportKey('PEM'))
     return fileName + '.priv'
 def sign_certificate_request(csr_cert, ca_cert, private_ca_key):
     cert = x509.CertificateBuilder().subject_name(
@@ -161,7 +161,7 @@ if __name__ == "__main__":
                 print("File not found")
                 continue
             cert = sign_certificate_request(cert_csr,ca_cert,priv_key)
-            CaCertName = input("Enter the certificate name [ca-cert.pem] : ") or "cert.pem"
+            CaCertName = input("Enter the certificate name [cert.pem] : ") or "cert.pem"
             with open(CaCertName, "wb") as f:
                 f.write(cert.public_bytes(Encoding.PEM))
         elif(UserOption == 7):
