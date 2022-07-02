@@ -1,3 +1,4 @@
 pycryptodome==3.5
 cryptography==37.0.2
 newmodule1
+newmodule2
